@@ -1,0 +1,87 @@
+{
+  "project_name": "talentdesk-prototype",
+  "tech_stack": {
+    "framework": "Next.js (App Router, Route Handlers)",
+    "language": "TypeScript",
+    "dependencies": [
+      "next",
+      "react",
+      "react-dom",
+      "@prisma/client",
+      "prisma",
+      "zod",
+      "date-fns"
+    ]
+  },
+  "core_features": [
+    {
+      "name": "Freelancer & Vendor Directory",
+      "description": "Single searchable registry for freelancers and vendors with CRUD fields: name, email, role/type, status, hourly rate, currency, start/end dates, and compliance flags."
+    },
+    {
+      "name": "Onboarding Tracker",
+      "description": "Checklist-based onboarding per freelancer/vendor (contract signed, tax form received, NDA complete, payment method set) with completion percentage and status transitions."
+    },
+    {
+      "name": "Project Assignment & Costing",
+      "description": "Assign freelancers to projects with bill rate, estimated hours, and date range; auto-calculate planned cost per assignment and aggregate per project."
+    },
+    {
+      "name": "Budget Dashboard",
+      "description": "View budget vs. planned spend vs. actual paid amount by project and by month, with over-budget highlighting for quick operational decisions."
+    },
+    {
+      "name": "Budget Reporting API Export",
+      "description": "Generate JSON/CSV-ready budget report payloads from an API endpoint for external accounting tools or manual downloads."
+    }
+  ],
+  "file_structure": [
+    "prisma/schema.prisma",
+    "prisma/seed.ts",
+    "src/app/layout.tsx",
+    "src/app/page.tsx",
+    "src/app/dashboard/page.tsx",
+    "src/app/freelancers/page.tsx",
+    "src/app/vendors/page.tsx",
+    "src/app/projects/page.tsx",
+    "src/app/reports/page.tsx",
+    "src/app/api/freelancers/route.ts",
+    "src/app/api/freelancers/[id]/route.ts",
+    "src/app/api/vendors/route.ts",
+    "src/app/api/vendors/[id]/route.ts",
+    "src/app/api/projects/route.ts",
+    "src/app/api/projects/[id]/route.ts",
+    "src/app/api/assignments/route.ts",
+    "src/app/api/onboarding/[entityType]/[id]/route.ts",
+    "src/app/api/reports/budget/route.ts",
+    "src/components/freelancer-table.tsx",
+    "src/components/vendor-table.tsx",
+    "src/components/onboarding-checklist.tsx",
+    "src/components/project-assignment-form.tsx",
+    "src/components/budget-summary-cards.tsx",
+    "src/lib/db.ts",
+    "src/lib/validators.ts",
+    "src/lib/budget.ts",
+    "src/types/domain.ts"
+  ],
+  "acceptance_criteria": [
+    "User can create, edit, view, and archive freelancer records via UI and REST endpoints.",
+    "User can create, edit, view, and archive vendor records via UI and REST endpoints.",
+    "Each freelancer/vendor has an onboarding checklist whose item states persist in the database.",
+    "User can assign a freelancer to a project with rate and hours, and planned cost is calculated correctly.",
+    "Dashboard shows total planned spend, total actual paid, and remaining budget for current month.",
+    "Budget report endpoint returns project-level totals and monthly rollups in JSON.",
+    "All write endpoints validate payloads with Zod and return consistent error responses.",
+    "Prototype runs locally with SQLite and seeded sample data in under 5 minutes of setup."
+  ],
+  "setup_commands": [
+    "npx create-next-app@latest talentdesk-prototype --typescript --app --src-dir --eslint",
+    "cd talentdesk-prototype",
+    "npm install @prisma/client zod date-fns",
+    "npm install -D prisma tsx",
+    "npx prisma init --datasource-provider sqlite",
+    "npx prisma migrate dev --name init",
+    "npx prisma db seed",
+    "npm run dev"
+  ]
+}
