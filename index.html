@@ -36,6 +36,17 @@
     .social-proof { text-align: center; color: #64748b; font-size: 0.9rem; margin-top: 1rem; }
     footer { text-align: center; padding: 2rem; color: #94a3b8; font-size: 0.85rem; }
   </style>
+  <!-- OpenClaw pageview beacon (Formspree-based) -->
+  <script>
+    (function(){
+      try {
+        var d = {_subject:'pageview', page:location.pathname, ref:document.referrer||'direct', ua:navigator.userAgent.slice(0,80)};
+        if(sessionStorage.getItem('oc_pv')) return; // one per session
+        sessionStorage.setItem('oc_pv','1');
+        fetch('https://formspree.io/f/xgoprpaw',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(d)});
+      } catch(e){}
+    })();
+  </script>
 </head>
 <body>
   <section class="hero">
@@ -70,7 +81,7 @@
   <section class="waitlist" id="waitlist">
     <h2>Get Early Access</h2>
     <p>Be the first to try it when we launch.</p>
-    <form action="https://formspree.io/f/placeholder" method="POST" style="margin-top:1rem;">
+    <form action="https://formspree.io/f/xgoprpaw" method="POST" style="margin-top:1rem;">
       <input type="email" name="email" placeholder="you@company.com" required>
       <button type="submit">Join the Waitlist</button>
     </form>
